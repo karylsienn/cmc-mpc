@@ -1,0 +1,4 @@
+* MPC_choke3, fitted values for the generic MPC subcircuit. Needs .include MPC.sub
+.subckt MPC_choke3 port1 port2 port3 port4
+XMPC port1 port2 port3 port4 MPC LC=1.31934e-05 CC=1e-14 RC=2336.9 LD=5.72264e-07 CD=5.62282e-13 RD=1269.4 CW=1.14048e-12 Lw=1e-12 Cwt=1e-15 Rw=1e+06 Rcr=50.9365 Ccr=7.04504e-13 Rrl=2311.47 Lrl=1.59245e-05 Cg=2.7001e-13 RDC=1e-06
+.ends MPC_choke3

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cmc-mpc"
+version = "0.1.0"
+description = "Modal-parameters circuit models of common-mode chokes, with fitting and LTspice export"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Karol Niewiadomski"}]
+dependencies = ["numpy", "scipy"]
+
+[project.optional-dependencies]
+dev = ["pytest", "matplotlib", "spicelib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

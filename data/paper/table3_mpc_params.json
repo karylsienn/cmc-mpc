@@ -1,0 +1,96 @@
+{
+  "_source": "Ojeda-Rodriguez et al., IEEE TPEL 38(9), 2023, Table III. SI units. L_rated_H is the datasheet rating quoted in the paper (minimum value for the two KEMET parts). The text names the EPCOS part B82722A230N001, Table III names it B82722A2302N001.",
+  "KEMET_SU9V-R01180": {
+    "L_rated_H": 0.018,
+    "LC": 0.0507,
+    "CC": 1.24e-11,
+    "RC": 245000.0,
+    "LD": 0.0001532,
+    "CD": 1.42e-11,
+    "RD": 34200.0,
+    "CW": 2.2e-12,
+    "lcr_w": null,
+    "cr_branches": [],
+    "C_sym_paper": 2.62e-11,
+    "figures": [
+      "7",
+      "8"
+    ]
+  },
+  "KEMET_SC-02-30G": {
+    "L_rated_H": 0.0033,
+    "LC": 0.0071,
+    "CC": 3.1e-12,
+    "RC": 35300.0,
+    "LD": 7.3e-06,
+    "CD": 3.3e-12,
+    "RD": 16100.0,
+    "CW": 2.9e-12,
+    "lcr_w": null,
+    "cr_branches": [],
+    "C_sym_paper": 3.7e-12,
+    "figures": [
+      "9",
+      "10"
+    ]
+  },
+  "EPCOS_B82722A2302N001": {
+    "L_rated_H": 0.0012,
+    "LC": 0.0027,
+    "CC": 3.3e-12,
+    "RC": 24300.0,
+    "LD": 7.6e-06,
+    "CD": 3.5e-12,
+    "RD": 10000.0,
+    "CW": 1.65e-11,
+    "lcr_w": [
+      3e-07,
+      9.1e-12,
+      1000.0
+    ],
+    "cr_branches": [],
+    "C_sym_paper": -9.5e-12,
+    "figures": [
+      "11",
+      "12"
+    ],
+    "lcr_w_as_printed": [
+      9.1e-06,
+      3e-13,
+      1000.0
+    ]
+  },
+  "WE_7448261418": {
+    "L_rated_H": 0.0018,
+    "LC": 0.0039,
+    "CC": 3.7e-12,
+    "RC": 24900.0,
+    "LD": 9.7e-06,
+    "CD": 3.2e-12,
+    "RD": 11000.0,
+    "CW": 1.65e-11,
+    "lcr_w": [
+      3e-07,
+      8.2e-12,
+      700.0
+    ],
+    "cr_branches": [
+      [
+        11500.0,
+        1.22e-11
+      ]
+    ],
+    "C_sym_paper": -1.01e-11,
+    "figures": [
+      "13",
+      "14",
+      "15"
+    ],
+    "lcr_w_as_printed": [
+      8.2e-06,
+      3e-13,
+      700.0
+    ]
+  },
+  "_lcr_w_note": "Table III prints the LCR_W columns as L = 9.1/8.2 uH and C = 0.3 pF. These values contradict Figs. 11-15. Swapping the L and C columns (L = 0.3 uH, C = 9.1/8.2 pF) keeps the resonance frequency and reproduces Fig. 15, and a free fit to Fig. 15 returned L = 0.31 uH, C = 8.1 pF, R = 745 Ohm. lcr_w holds the corrected values, lcr_w_as_printed the values in the paper. See docs/decisions.md."
+}
