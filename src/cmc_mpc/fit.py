@@ -211,12 +211,22 @@ class FitResult:
     seconds: float
     nfev: int
 
+    @property
+    def hits(self) -> int:
+        """Number of multistart runs that reached the best cost, within 1 percent."""
+        c = np.asarray(self.start_costs)
+        return int(np.sum(c <= c.min() * 1.01 + 1e-6)) if len(c) else 0
+
     def report(self) -> str:
         rows = []
         for n, th, sd, ab in zip(self.names, self.theta, self.log_std, self.at_bound):
             st = "determined" if sd < 0.3 else ("weak" if sd < 1 else "NOT determined")
             rows.append(f"  {n:6s} {np.exp(th):11.4g}  log-std {sd:9.3g}  {st}{'  AT BOUND' if ab else ''}")
-        return (f"method {self.method}, cost {self.cost:.4g}, {self.seconds:.1f} s\n" + "\n".join(rows))
+        n = len(self.start_costs)
+        note = f"\nbest cost reached by {self.hits} of {n} starts" if n > 1 else ""
+        if n > 1 and self.hits == 1:
+            note += ", only one. This may be a local minimum, increase nstart or use method='de'"
+        return (f"method {self.method}, cost {self.cost:.4g}, {self.seconds:.1f} s{note}\n" + "\n".join(rows))
 
 
 def fit(meas, variant: Variant = Variant(), method: str | Callable = "least_squares", bounds: dict | None = None,

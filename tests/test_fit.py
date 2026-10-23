@@ -32,8 +32,12 @@ def test_four_port_least_squares_recovers_setups(s4p):
 
 
 def test_oc_wd_only(s4p):
+    """The OC and WD fit has a local minimum at 1.26 dB error that about half of the random starts fall into.
+    With 15 starts the result depended on the scipy version, so 60 starts are used, which found the global
+    minimum for every seed tried. fit() reports how many starts reached the best cost."""
     meas = SetupCurves(F, {k: s21(k, F, TRUTH) for k in ("oc", "wd")})
-    r = fit(meas, Variant(lcr_w=True, cr=1, rl=0, cg=False), nstart=15, seed=2)
+    r = fit(meas, Variant(lcr_w=True, cr=1, rl=0, cg=False), nstart=60, seed=2)
+    assert r.hits >= 2
     for setup in ("oc", "wd"):
         assert il_err(r.params, setup) < 0.5, setup
 

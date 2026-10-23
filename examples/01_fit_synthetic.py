@@ -24,8 +24,8 @@ def rms_db(p, k):
 cases = {
     "four-port, least squares": (FourPort(F, S), Variant(cg=True), dict(method="least_squares", nstart=30)),
     "four-port, differential evolution": (FourPort(F, S), Variant(cg=True), dict(method="de", popsize=15, maxiter=200)),
-    "OC + WD, least squares": (SetupCurves(F, {k: s21(k, F, TRUTH) for k in ("oc", "wd")}), Variant(cg=False), dict(nstart=30)),
-    "asym + sym, least squares": (SetupCurves(F, {k: s21(k, F, TRUTH) for k in ("asym", "sym")}), Variant(cg=False), dict(nstart=30)),
+    "OC + WD, least squares": (SetupCurves(F, {k: s21(k, F, TRUTH) for k in ("oc", "wd")}), Variant(cg=False), dict(nstart=60)),
+    "asym + sym, least squares": (SetupCurves(F, {k: s21(k, F, TRUTH) for k in ("asym", "sym")}), Variant(cg=False), dict(nstart=60)),
 }
 print(f"{'input, optimizer':36s}{'time s':>8s}{'evals':>8s}" + "".join(f"{k:>8s}" for k in ("oc", "wd", "asym", "sym")) + "   rms error of S21 vs truth, dB")
 for name, (m, v, kw) in cases.items():
