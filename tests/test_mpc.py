@@ -137,9 +137,19 @@ def test_three_series_setups_give_cispr_il(name):
 
 
 def test_rdc_closed_form_matches_netlist():
+    """The netlist has ideal coupling, so its inductance matrix is singular and the nodal solve is conditioned at about
+    1e-9. The comparison therefore uses a tolerance relative to the largest admittance at each frequency, which differs
+    between BLAS libraries (it failed at 1e-8 element-wise on macOS). A wrong Rdc factor changes the result by orders
+    of magnitude more, which the second check confirms."""
     import dataclasses
     from cmc_mpc.circuit import mpc_netlist, port_y
     from cmc_mpc.mpc import y_matrix
     p = dataclasses.replace(PARAMS["WE_7448261418"], Cg=3e-13, Rdc=2.5)
     f = np.logspace(5, 9, 60)
-    assert np.allclose(port_y(mpc_netlist(p), f), y_matrix(f, p), rtol=1e-8, atol=1e-12)
+
+    def worst(q):
+        err = np.abs(port_y(mpc_netlist(q), f) - y_matrix(f, p))
+        return (err / np.abs(y_matrix(f, p)).max(axis=(1, 2))[:, None, None]).max()
+
+    assert worst(p) < 1e-6
+    assert worst(dataclasses.replace(p, Rdc=1.25)) > 1e-3     # deliberately wrong value must be caught
