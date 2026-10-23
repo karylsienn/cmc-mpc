@@ -1,5 +1,7 @@
 # cmc-mpc
 
+[![tests](https://github.com/karylsienn/cmc-mpc/actions/workflows/tests.yml/badge.svg)](https://github.com/karylsienn/cmc-mpc/actions/workflows/tests.yml)
+
 Modal-parameters circuit (MPC) models of common-mode chokes in Python, with fitting to measured data and export to LTspice.
 
 The model follows A. Ojeda-Rodriguez, J. Bernal-Mendez and M. A. Martin-Prats, "Modal Theory and Approach for Accurate Characterization of Common-Mode Chokes", IEEE Trans. Power Electron., 38(9), 2023. This repository is an independent implementation and extension. It is not affiliated with the authors.
@@ -16,7 +18,11 @@ The model follows A. Ojeda-Rodriguez, J. Bernal-Mendez and M. A. Martin-Prats, "
 
 ## Quick start
 
+Developed and tested with Python 3.13.2. Python 3.10 or newer is required.
+
 ```bash
+git clone https://github.com/karylsienn/cmc-mpc
+cd cmc-mpc
 pip install -e .[dev]     # or: pip install -r requirements-dev.txt
 pytest
 python examples/01_fit_synthetic.py
